@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+>
+<head>
+    <title>Close Session</title>
+</head>
+<body>
+<table>
+    <tr>
+        <td>
+            <h2 th:inline="text">Пользователь: <u>[[${#httpServletRequest.remoteUser}]]</u>
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Выход"/>
+                </form>
+            </h2>
+        </td>
+    </tr>
+</table>
+<div>
+    Сумма в кассе на конец смены: <b th:text="${endAmount}"></b> рублей! Пересчитайте кассу!
+</div>
+</body>
+</html>

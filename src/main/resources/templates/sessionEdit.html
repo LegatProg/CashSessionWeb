@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактор смены</title>
+</head>
+<body>
+<h1>Редактор смены</h1>
+<form th:action="@{/session}" method="post">
+    <table>
+        <tr>
+            <td>Имя пользователя:</td>
+            <td><input type="text" th:name="username" th:value="${cashsession.getUserName()}" disabled="disabled">
+            </td>
+        </tr>
+        <tr>
+            <td>Дата:</td>
+            <td><input type="text" th:name="date" th:value="${cashsession.getDate()}" disabled="disabled"></td>
+        </tr>
+        <tr>
+            <td>Начало смены (нал.):</td>
+            <td><input type="number" th:name="startAmount" th:value="${cashsession.getStartAmount()}"
+                       disabled="disabled"></td>
+        </tr>
+        <tr>
+            <td>Выручка (нал.):</td>
+            <td><input type="number" th:name="cash" th:value="${cashsession.getCash()}"></td>
+        </tr>
+        <tr>
+            <td>Выручка (б/н):</td>
+            <td><input type="number" th:name="nonCash" th:value="${cashsession.getNonCash()}"></td>
+        </tr>
+        <tr>
+            <td>Возвраты (нал.):</td>
+            <td><input type="number" th:name="cashReturn" th:value="${cashsession.getCashReturn()}"></td>
+        </tr>
+        <tr>
+            <td>Выручка (б/н):</td>
+            <td><input type="number" th:name="nonCashReturn" th:value="${cashsession.getNonCashReturn()}"></td>
+        </tr>
+        <tr>
+            <td>Клининг (нал.):</td>
+            <td><input type="number" th:name="cleaning" th:value="${cashsession.getCleaning()}"></td>
+        </tr>
+        <tr>
+            <td>Инкассация (нал.):</td>
+            <td><input type="number" th:name="collection" th:value="${cashsession.getCollection()}"></td>
+        </tr>
+        <tr>
+            <td>Окончание смены (нал.):</td>
+            <td><input type="number" th:name="endAmount" th:value="${cashsession.getEndAmount()}" disabled="disabled">
+            </td>
+        </tr>
+        <tr>
+            <td>Примечание:</td>
+            <td><input type="text" th:name="note" th:value="${cashsession.getNote()}"></td>
+        </tr>
+    </table>
+    <input type="hidden" th:value=${cashsession.id} name="sessionId">
+    <button type="submit">Сохранить</button>
+</form>
+</body>
+</html>

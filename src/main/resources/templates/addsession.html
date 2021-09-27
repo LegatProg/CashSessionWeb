@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+>
+<head>
+    <title>Add New Session</title>
+</head>
+<body>
+<div th:text="${prevSessionId}">Id</div>
+<table>
+    <tr>
+        <td>
+            <a th:href="@{/home}">Стартовая страница</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <h2 th:inline="text">Пользователь: <u>[[${#httpServletRequest.remoteUser}]]</u></h2>
+        </td>
+        <td>
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Выход"/>
+            </form>
+        </td>
+    </tr>
+</table>
+<div>
+    <table>
+        <td>
+            <table>
+                <form th:action="@{/addsession}" method="post">
+                    <tr>
+                        Заполните данные:
+                    </tr>
+                    <tr>
+                        <td>Сумма в кассе на начало смены (нал.):</td>
+                        <td><input type="text" name="startAmount" th:value="${startAmount}" disabled="disabled"></td>
+                    </tr>
+                    <tr>
+                        <td>1. Выручка (нал.):</td>
+                        <td><input type="number" step="1" name="cash" value="0"></td>
+                    </tr>
+                    <tr>
+                        <td>2. Выручка (б/н):</td>
+                        <td><input type="number" step="1" name="nonCash" value="0"></td>
+                    </tr>
+                    <tr>
+                        <td>3. Возвраты (нал.):</td>
+                        <td><input type="number" step="1" name="cashReturn" value="0"></td>
+                    </tr>
+                    <tr>
+                        <td>4. Возвраты (б/н):</td>
+                        <td><input type="number" step="1" name="nonCashReturn" value="0"></td>
+                    </tr>
+                    <tr>
+                        <td>5. Расходы на клининг:</td>
+                        <td><input type="number" step="1" name="cleaning" value="0"></td>
+                    </tr>
+                    <tr>
+                        <td>6. Инкассация:</td>
+                        <td><input type="number" step="1" name="collection" value="0"></td>
+                    </tr>
+                    <tr>
+                        <td>7. Сверка итогов (терминал):</td>
+                        <td><input type="number" step="1" name="terminal" value="0"></td>
+                    </tr>
+                    <tr>
+                        <td>8. Бонус-касса:</td>
+                        <td><input type="number" step="1" name="bonus" value="0"></td>
+                    </tr>
+                    <tr>
+                        <td>9. Примечание:</td>
+                        <td><textarea type="text" rows="4" name="note" value=""></textarea></td>
+                    </tr>
+                    <tr>
+
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" value="добавить смену"></td>
+                    </tr>
+                </form>
+                </td>
+            </table>
+        <td valign="top">
+            <h3>Инcтрукция по закрытию смены:</h3>
+            <div>
+                1. Не закрывайте смену в SENET и не снимайте сверку итогов (инкассацию) НА ТЕРМИНАЛЕ!
+            </div>
+            <div>
+                2. Снимите Х-Отчет в SENET.
+            </div>
+            <div>
+                3. Снимите отчет (сводный чек) на банковском терминале.
+            </div>
+            <div>
+                4. ВНИМАНИЕ: Не производите операций по кассе и терминалу пока не закончите закрытие смены!
+            </div>
+            <div>
+                5. Сравните б/н выручку в Х-Отчете и на сводном чеке банковского терминала. Если суммы сходятся - все в
+                порядке, если суммы не сходятся - выясните причину и устраните.
+            </div>
+            <div>
+                6. Закройте смену в SENET (Z-Отчет) и сделайте сверку итогов (инкассацию) на банковском терминале.
+            </div>
+            <div>
+                7. Внесите данные из Z-Отчета в соответсвующие поля CashSession. ВЫРУЧКА НАЛ (поле №1) и ВЫРУЧКА Б/Н
+                (поле №2) (Общие суммы вместе с возвратами - две строки в чеке сразу после общей суммы выручки).
+            </div>
+            <div>
+                8. Внесите данные из Z-Отчета в соответсвующие поля CashSession. ВОЗВРАТЫ НАЛ (поле №3) и ВОЗВРАТЫ Б/Н
+                (поле №4).
+            </div>
+            <div>
+                9. Внесите расход на клининг (если был). РАСХОДЫ НА КЛИНИНГ (поле №5).
+            </div>
+            <div>
+                10. Внесите сумму инкассации (если была). ИНКАССАЦИЯ (поле №6). Обязательно в поле ПРИМЕЧАНИЕ (поле №9) указать
+                причину инкассации и имя инкассатора.
+            </div>
+            <div>
+                11. Внесите данные из сверки итогов (инкассации) с банковского терминала. СВЕРКА ИТОГОВ (ТЕРМИНАЛ) (поле
+                №7).
+            </div>
+            <div>
+                12. Внесите данные о бонус-кассе. БОНУС-КАССА (поле №8). Причину оплаты по бонус-кассе внесите в поле ПРИМЕЧАНИЕ (поле №9). Закройте смену на бонус-кассе.
+            </div>
+            <div>
+                13. Причины возвратов/инкассаций, причину оплаты по бонус-кассе, либо любую другую важную информацию о кассах/сменах внесите в поле
+                ПРИМЕЧАНИЕ (поле №9).
+            </div>
+            <div>
+                14. Нажмите кнопку "Добавить смену".
+            </div>
+        </td>
+    </table>
+</div>
+<a href="#" onclick="history.back();return false;">Вернуться назад</a>
+</body>
+</body>
+</html>

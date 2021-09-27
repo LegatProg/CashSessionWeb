@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Список смен</title>
+</head>
+<body>
+<table>
+    <tr>
+        <td>
+            <a th:href="@{/home}">Стартовая страница</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <h2 th:inline="text">Пользователь: <u>[[${#httpServletRequest.remoteUser}]]</u></h2>
+        </td>
+        <td>
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Выход"/>
+            </form>
+        </td>
+    </tr>
+</table>
+<div>
+    <form th:action="@{/sessionList}" method="get">
+        <p>
+            Выберите даты:
+            <br>Начало:
+            <input type="date" name="startDateStr">
+            Конец:
+            <input type="date" name="endDateStr">
+            <input type="submit" value="Найти">
+        </p>
+    </form>
+</div>
+<a href="#" onclick="history.back();return false;">Вернуться назад</a>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Список смен</title>
+</head>
+<body>
+<table>
+    <tr>
+        <td>
+            <a th:href="@{/home}">Стартовая страница</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <h2 th:inline="text">Пользователь: <u>[[${#httpServletRequest.remoteUser}]]</u></h2>
+        </td>
+        <td>
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Выход"/>
+            </form>
+        </td>
+    </tr>
+</table>
+<div>
+    <table border="1" align="center">
+        <thead>
+        <th></th>
+        <th>ID</th>
+        <th>Проверена</th>
+        <th>Пользователь</th>
+        <th>Дата</th>
+        <th>Начало смены</th>
+        <th>Выручка (нал.)</th>
+        <th>Выручка (б/н)</th>
+        <th>Возвраты (нал.)</th>
+        <th>Возвраты (б/н)</th>
+        <th>Клининг</th>
+        <th>Инкассация</th>
+        <th>Конец смены</th>
+        <th>Бонус-касса</th>
+        <th>Примечание</th>
+        </thead>
+        <tbody align="center">
+        <tr th:each="cashsession:${sessions}">
+            <td><a th:href="@{'/session/'+${cashsession.id}}">изменить</a></td>
+            <td th:text="${cashsession.id}"></td>
+            <td th:text="${cashsession.isChecked}"></td>
+            <td th:text="${cashsession.getUserName()}"></td>
+            <td th:text="${cashsession.date}"></td>
+            <td th:text="${cashsession.startAmount}"></td>
+            <td th:text="${cashsession.cash}"></td>
+            <td th:text="${cashsession.nonCash}"></td>
+            <td th:text="${cashsession.cashReturn}"></td>
+            <td th:text="${cashsession.nonCashReturn}"></td>
+            <td th:text="${cashsession.cleaning}"></td>
+            <td th:text="${cashsession.collection}"></td>
+            <td th:text="${cashsession.endAmount}"></td>
+            <td th:text="${cashsession.bonus}"></td>
+            <td th:text="${cashsession.note}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+
+    <h3><a th:href="@{'/'+${path}}" download="">Экспорт в XLS</a></h3>
+    <br>
+    <a href="#" onclick="history.back();return false;">Вернуться назад</a>
+
+
+</div>
+</body>
+</html>

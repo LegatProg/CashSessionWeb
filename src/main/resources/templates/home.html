@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Spring Security Example</title>
+</head>
+<body>
+<h1>Добро пожаловать!</h1>
+<h2 th:inline="text">Пользователь:
+    <u th:if="${#httpServletRequest.remoteUser} == null">не залогинен</u>
+    <u th:if="${#httpServletRequest.remoteUser} != null">[[${#httpServletRequest.remoteUser}]]</u>
+<form th:action="@{/logout}" method="post" th:if="${#httpServletRequest.remoteUser} != null">
+    <input type="submit" value="Выход"/>
+</form>
+</h2>
+<table>
+    <tr>
+        <td>Открыть смену:</td>
+        <td><a th:href="@{/openSession}">ссылка</a></td>
+    </tr>
+    <tr>
+        <td>Закрыть смену:</td>
+        <td><a th:href="@{/addsession}">ссылка</a></td>
+    </tr>
+    <tr>
+        <td>Редактор пользователей:</td>
+        <td><a th:href="@{/user}">ссылка</a> (Только для руководителей)</td>
+    </tr>
+    <tr>
+        <td>Просмотр кассовых смнен:</td>
+        <td><a th:href="@{/sessionDates}">ссылка</a> (Только для руководителей)</td>
+    </tr>
+
+</table>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+>
+<head>
+    <title>Open Session</title>
+</head>
+<body>
+<table>
+    <tr>
+        <td>
+            <a th:href="@{/home}">Стартовая страница</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <h2 th:inline="text">Пользователь: <u>[[${#httpServletRequest.remoteUser}]]</u>
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Выход"/>
+                </form>
+            </h2>
+        </td>
+    </tr>
+</table>
+<div>
+    <form method="post" th:action="@{/openSession}">
+        Сумма в кассе на начало смены: <b th:text="${startAmount}"></b> рублей! Пересчитайте кассу!
+        <input type="submit" value="Подтвердить сумму в кассе!">
+    </form>
+</div>
+<a href="#" onclick="history.back();return false;">Вернуться назад</a>
+</body>
+</html>
